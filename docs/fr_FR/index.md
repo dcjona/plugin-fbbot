@@ -1,16 +1,14 @@
 # Description
 
-Ce plugin permet d'établir une connexion entre Facebook Messenger et Jeedom pour
-envoyer des alertes à partir de Jeedom ou discuter avec Jeedom (en utilisant les
+Ce plugin permet d'établir une connexion entre Facebook Messenger et NextDom pour
+envoyer des alertes à partir de NextDom ou discuter avec NextDom (en utilisant les
  interactions).
 
 # Pré-requis
 
 Les pré-requis suivant sont nécessaires pour faire fonctionner le plugin fbbot :
--   Disposer d'une URL externe pour Jeedom
+-   Disposer d'une URL externe pour NextDom
 -   Être en https (imposé par Facebook)
--   Avoir configuré des interactions dans Jeedom pour que Jeedom comprenne des
-commandes
 -   Disposer d'un compte Facebook
 -   Disposer d'un compte Facebook Developper (simple et gratuit)
 -   Avoir téléchargé le plugin (qui a dit que c'était évident ? ;)
@@ -19,13 +17,16 @@ commandes
 # Etapes d'installation
 
 Dans l'ordre nous allons effectuer les étapes d'installation suivantes :
--   Créer l'application Messenger sur Facebook
--   Ajouter l'équipement logique dans Jeedom
--   Configurer le webhook sur Facebook
--   Créer et gérer les utlisateurs
+
 
 Ces étapes doivent être effectuées dans cet ordre afin de disposer des tokens
-nécessaires pour autoriser l'interaction entre Facebook et votre Jeedom.
+nécessaires pour autoriser l'interaction entre Facebook et votre NextDom.
+Dans les prochaines étapes vous trouverez 3 éléments à conserver puisqu'il vous faudra les ajouter dans votre équipement Jeedom :
+
+Ces informations sont à garder précieusement pour la suite :
+Le "Facebook API Graph Access Token"
+Le "App secret".
+La "Page ID".
 
 # Création de l'application Messenger
 
@@ -41,32 +42,63 @@ ceux qui s'afficheront dans Facebook Messenger, alors choisissez-bien.
 Faites également attention de ne pas y mettre de données personnelles sensibles
  telle que votre adresse ou votre numéro de téléphone.
 
-Nous allons maintenant créer une application Facebook Messenger.
+Nous allons maintenant créer une application Facebook Messenger via ce lien
 
-Pour créer une application Messenger aller sur
-<https://developers.facebook.com/apps>.
-Cliquer sur "Add a new app". Choisir un nom et confirmer un email de contact,
-puis valider.
-Sur la page qui s'affiche, cliquer sur le bouton "Get Started" de la ligne
-Messenger.
+HTTPS://www.facebook.com/pages/create
 
-![fbbot5](../images/fbbot5.png)
+Choisissez "Figure locale ou publique"
 
-Maintenant, descendez au niveau du paragraphe "Token Generation".
-Dans le champ Page, choisir la page créée en début d'étape 2 pour contenir les
-informations de votre bot.
+FB1.png
 
-![fbbot6](../images/fbbot6.png)
+Saisissez le nom de votre page public ainsi qu'une catégorie à laquelle l'associer puis continuez.
 
-Cela vous génère un token dans le champ "Page Access Token" permettant d'accéder
-et d'utiliser les API Facebook. Copier ce token afin de le réutiliser dans
-quelques secondes.
-Nous allons maintenant passer à l'étape de création dans Jeedom.
+FB2.png
+
+
+Création de l'application Messenger. Pour ce faire, rendez-vous sur l'adresse suivante :
+
+https://developers.facebook.com/apps
+
+Cliquez sur le + pour ajotuer une app
+
+FB3.png
+
+Renseignez ensuite un nom d'usage et validez votre adresse mail de contact et cliquez sur "Créer un ID app".
+
+Une fois sur l'app cliquez sur le menu Tableau de bord et tout en bas sur Messenger
+
+FB4.png
+
+Associez ensuite votre page Facebook à votre application Messenger.
+
+FB5.png
+
+Modifiez les autorisations et générer un Facebook API Graph Access Token ( à noter n'oubliez pas)
+Suivez les instructions de sorte à sélectionner la page créée précédemment et acceptez la demande de droits.
+
+Récupérons maintenant l'ID de la page Facebook. Pour ce faire, retournez sur votre page et modifiez-la.
+
+FB6.png
+
+vous retrouverez l'ID de la page dans l'url...
+
+Recherchons maintenant l'App secret que vous trouverez en retournant sur le tableau de bord de votre application :
+
+https://developers.facebook.com/apps
+
+dans le menu Paramètres -> Génral -> clé secrète
+
+Nous avons donc pu récupérer :
+
+Le "Facebook API Graph Access Token"
+Le "App secret".
+La "Page ID".
+Nous allons donc pouvoir commencer à configurer notre équipement dans nextDom.
 
 # Configuration des équipements
 
-Nous allons maintenant créer un équipement dans Jeedom pour gérer notre bot.
-Allez dans Jeedom et choisissez "Fbbot" dans la liste des plugins.
+Nous allons maintenant créer un équipement dans NextDom pour gérer notre bot.
+Allez dans NextDom et choisissez "Fbbot" dans la liste des plugins.
 
 ![fbbot1](../images/fbbot1.png)
 
@@ -91,13 +123,13 @@ faire fonctionner votre équipement :
 -   **Visible** : le rend visible sur le dashboard
 -   **Page ID** : c'est l'ID de votre page Facebook que vous avez crée un peu
 plus haut. Cette donnée est obligatoire. Elle est utilisée comme identifiant
-logique dans Jeedom et servira à distinguer vos différets bots si vous en
+logique dans NextDom et servira à distinguer vos différets bots si vous en
 créez plusieurs. Pour trouver cet identifiant suivez les étapes du paragraphe
 ci-après.
 -   **URL de retour** : c'est l'url de votre Webhook qu'il faudra
 renseigner dans Facebook à l'étape suivante. Cette URL doit être en https et
 impérativement accessible de l'extérieur.
--   **Verify Token** : token de l'api fbbot dans Jeedom. Ce token est
+-   **Verify Token** : token de l'api fbbot dans NextDom. Ce token est
  utilisé par Facebook lors de la vérification de votre webhook.
 -   **App secret** : il s'agit du code de sécurité de votre application sur
 Facebook. Ce code sert à crypter un token de vérification permettant à chaque
@@ -107,7 +139,7 @@ est obligatoire. Voir le paragraphe ci-après pour savoir ou trouver ce code.
 -   **Facebook API Graph Access Token** : il s'agit du token généré par Facebook
 pour vous permettre d'utiliser leur API. Ce token est celui que nous avons
 copié dans l'étape précédente. Collez le ici.
--   **Créer les nouveaux contacts** : il s'agit d'une option indiquant à Jeedom
+-   **Créer les nouveaux contacts** : il s'agit d'une option indiquant à NextDom
 de créer automatiquement les nouveaux contacts. Voir détail dans le paragraphe
 de gestion des utilisateurs.
 
@@ -118,7 +150,7 @@ En dessous vous retrouvez la configuration des commandes :
 
 -   **Nom** : nom de la commande
 -   **Facebook User ID** : ID de l'utilisateur Facebook sous forme numérique
--   **Jeedom Username** : nom de l'utilisateur Jeedom associé à l'utilisateur
+-   **NextDom Username** : nom de l'utilisateur NextDom associé à l'utilisateur
  Facebook
 -   **Autorisations** : Cette colonne contient par défaut le seul champ
  "Visible", puis contiendra pour les utilisateurs ajoutés les champs Chat
@@ -136,96 +168,53 @@ Par défaut les commandes contiennent trois commandes crées lors de
 -   **Tous** : Permet de contacter tous les utilisateurs enregistrés lorsqu'il
  y en aura. Voir gestion des utilisateurs.
 
-## Trouver l'identifiant de sa page Facebook
+Votre équipement FBbot est maintenant prêt. Il faut cependant configurer l'application Messenger de sorte à ce qu'elle réponde à NextDom lorsqu'elle recevra un message.
 
-Pour trouver l'identifiant de sa page Facebook, suivez les étapes suivantes :
+Pour ce faire, retournez à votre application Messenger :
 
-Aller sur la page Facebook que vous avez crée en début de process.
+https://developers.facebook.com/apps
 
-![fbbot-id page facebook](../images/fbbot-id page facebook.png)
+Sous l'onglet Produits -> Messenger -> Paramètres zone Webhooks
 
-Cliquer sur Edit Page Info. Cela ouvre le pop-up suivant :
+Cliquez sur "S'inscrire aux événements"
 
-![fbbot-id page facebook 2](../images/fbbot-id page facebook2.png)
+Saisissez l'URL de retour et le "Verify Token" récupérés précédemment dans NextDom et sélectionnez les événements :
 
-Scroller tout en bas, puis cliquer sur "See All Information". Cela ouvre la
- page suivante :
+messages
+message_reads
+messaging_postbacks
 
-![fbbot-id page facebook 3](../images/fbbot-id page facebook3.png)
+puis validez.
 
-Votre Page ID est tout en bas. Copier le dans le champ "Page ID" de votre
- équipement fbbot.
+Toujours dans la configuration des webhooks, choisissez votre page dans la liste déroulante et cliquez sur "S'abonner".
 
-## Trouver l'app secret
+En l'état, votre équipement NextDom est capable d'envoyer des messages à votre page et celle-ci d'y répondre, mais uniquement à l'administrateur de la page.
+La prochaine étape consiste à ajouter des utilisateurs.
+Pour ce faire, retournez sur votre page Facebook et cliquez sur "Ajouter un bouton"
 
-Pour trouver votre app secret suivre les étapes suivantes :
+FB7.png
 
-Aller sur la page d'accueil Developers Facebook à l'adresse suivante : <https://developers.facebook.com/apps/>.
+Positionnez ensuite le cuseur sur le nouveau bouton et cliquez sur Tester le bouton.
 
-Cliquer sur le nom de l'application que vous venez de créer dans les étapes
- précédentes.
+Envoyez ensuite un message à votre page Facebook depuis votre propre compte. Celle-ci vous répondra :
 
-Sur la page qui s'affiche cliquer sur le bouton "Show" pour visualiser l'app
- secret.
+"Utilisateur non habilité"
 
-![fbbot9](../images/fbbot9.png)
+Retournez dans NextDom et accédez à l'onglet "Commandes" de votre équipement FBbot.
 
-Copier ce code dans le champ "App Secret" des paramètres de votre équipement
- fbbot Jeedom.
+Remplacer donc New user par votre prénom
 
-# Configuration du webhook
-
-A ce stade notre équipement fbbot a été complètement configuré et activé et est
- donc pleinement fonctionnel.
-Il faut désormais ajouter la configuration du webhook à notre application
- Facebook Messenger.
-Ce webhook permettra à Facebook de savoir comment et ou contacter notre Jeedom
- lorsqu'un nouveau message est reçu sur Facebook Messenger.
-Pour cela rendez-vous sur la page de configuration de votre application
- Facebook Messenger.
-
-![fbbot10](../images/fbbot10.png)    
-
-Si vous aviez quitté la page de configuration de l'étape 3, cliquer sur le lien
- Messenger dans votre Dashboard, comme montré ci-dessus.
-
-Descendez jusqu'au paragraphe Webhooks et cliquer sur le bouton "Setup
- Webhooks".
-
-![fbbot11](../images/fbbot11.png)
-
-Vous arrivez sur la page "New Page Subscription".
-Dans le champ "Subscription Fields", cochez les cases suivantes :
-* messages
-* messaging_postbacks
-* message_reads
-
-Dans le champ "Callback URL", entrer votre URL de retour indiqué dans le champ
- "URL de retour" de la page de configuration de votre équipement.
-
-Dans le champ "Verify Token", entrer votre Verify Token indiqué dans le champ
- "Verify Token" de la page de configuration de votre équipement.
-
-![fbbot12](../images/fbbot12.png)
-
-Cliquez sur "Verify and Save".
-
-Un indicateur vert vous confirmera que l'opération de vérification a réussi et
- le bon enregistrement.
-
-Si cette étape échoue c'est que vous avez manqué ou mal effectué l'une des
- opérations précédentes. Revenir en début de guide et recommencer.
-
-Votre Jeedom et Facebook Messenger peuvent maintenant communiquer.
-
+Vous pouvez sauvegarder l'équipement.
 
 # Gestion des utilisateurs
 
-Vous venez de finir la configuration du plugin et de Jeedom.
+Vous venez de finir la configuration du plugin et de NextDom.
 Il vous faut à présent utiliser le bot.
 Allez sur votre page Facebook et entamer une discussion ou bien trouver votre bot sur Messenger et entamer une discussion.
 
-Attention, par défaut la visbilité de votre bot est limité à l'administrateur de l'application Facebook crée. Pour y ajouter des utilisateur sans avoir à publier votre bot et donc à le faire vérifier par les équipes Facebook, vous devrez ajouter des utilisateurs en tant que Tester.
+Attention, par défaut la visibilité de votre bot est limité à l'administrateur de l'application Facebook créée.
+Pour y ajouter des utilisateur sans avoir à publier votre bot et donc à le faire vérifier par les équipes Facebook,
+vous devrez ajouter des utilisateurs en tant que Tester.
 
 Pour trouver votre bot utilisez donc bien le compte de l'adminsitrateur qui l'a
 crée.
@@ -240,7 +229,7 @@ Les différentes options et commandes à utiliser sont les suivantes :
 * **Créer les nouveaux contacts** : Par défaut tous les utilisateurs qui contactent votre bot seront ajoutés dans la liste des commandes. Cela vous évite de devoir trouver les ID Facebook des utilisateurs que vous souhaitez ajouter. Pour désactiver cette option, décochez la case.
 * **Chat** : Une fois l'utilisateur crée, pour l'autoriser, il vous faudra cocher la case "Chat". Cette case autorise les interactions depuis Facebook Messenger.</li>
 * **Notifications** : La case notifications permet de choisir les utilisateurs qui recevront les messages lorsque la commande "Tous" sera utilisée pour envoyer une alerte. Cochez la case pour inclure l'utilisateur ou décochez là pour désinclure cet utilisateur
-* **Jeedom Username** : Ce champ vous permet de pouvoir lier un utilisateur du bot à un profil Jeedom. De cette manière Jeedom saura qui essaye d'exécuter des commandes.
+* **NextDom Username** : Ce champ vous permet de pouvoir lier un utilisateur du bot à un profil NextDom. De cette manière NextDom saura qui essaye d'exécuter des commandes.
 
 Une fois ces modifications faites, vous avez terminé.
 Votre plugin est prêt à être utilisé.
