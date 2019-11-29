@@ -1,17 +1,15 @@
-# Description 2
+# Description 
 
 Ce plugin permet d'établir une connexion entre Facebook Messenger et NextDom pour
-envoyer des alertes à partir de NextDom ou discuter avec NextDom (en utilisant les
- interactions).
+envoyer des alertes à partir de NextDom.
 
 # Pré-requis
 
 Les pré-requis suivant sont nécessaires pour faire fonctionner le plugin fbbot :
 -   Disposer d'une URL externe pour NextDom
 -   Être en https (imposé par Facebook)
--   Disposer d'un compte Facebook
--   Disposer d'un compte Facebook Developper (simple et gratuit)
--   Avoir téléchargé le plugin (qui a dit que c'était évident ? ;)
+-   Disposer d'un compte Facebook + Facebook Developper (simple et gratuit)
+-   Installer le plugin Fbbot disponible sur le market NextDom
 
 
 # Etapes d'installation
@@ -21,7 +19,7 @@ Dans l'ordre nous allons effectuer les étapes d'installation suivantes :
 
 Ces étapes doivent être effectuées dans cet ordre afin de disposer des tokens
 nécessaires pour autoriser l'interaction entre Facebook et votre NextDom.
-Dans les prochaines étapes vous trouverez 3 éléments à conserver puisqu'il vous faudra les ajouter dans votre équipement Jeedom :
+Dans les prochaines étapes vous trouverez 3 éléments à conserver puisqu'il vous faudra les ajouter dans votre équipement NextDom :
 
 Ces informations sont à garder précieusement pour la suite :
 Le "Facebook API Graph Access Token"
@@ -30,8 +28,7 @@ La "Page ID".
 
 # Création de l'application Messenger
 
-La première étape est de créer une page Facebook (à ne pas confondre avec un
-compte ou un profil utilisateur).
+La première étape est de créer une page Facebook.
 Pour créer une page Facebook aller sur <https://www.facebook.com/pages/create>
 
 La création d'une page Facebook est imposée par Facebook pour tous les bots
@@ -39,8 +36,7 @@ Messenger. Cette page, publique, servira de profil publique à votre bot.
 Son nom et son avatar seront notamment
 ceux qui s'afficheront dans Facebook Messenger, alors choisissez-bien.
 
-Faites également attention de ne pas y mettre de données personnelles sensibles
- telle que votre adresse ou votre numéro de téléphone.
+Nul besoin de remplir les informations sur la page elle ne servira que pour notre bot.
 
 Nous allons maintenant créer une application Facebook Messenger via ce lien
 
@@ -48,13 +44,11 @@ HTTPS://www.facebook.com/pages/create
 
 Choisissez "Figure locale ou publique"
 
-![FB1](../images/FB1.PNG)
-
+![FB1](../images/FB1.png)
 
 Saisissez le nom de votre page public ainsi qu'une catégorie à laquelle l'associer puis continuez.
 
 ![FB2](../images/FB2.png)
-
 
 Création de l'application Messenger. Pour ce faire, rendez-vous sur l'adresse suivante :
 
@@ -92,29 +86,19 @@ dans le menu Paramètres -> Génral -> clé secrète
 Nous avons donc pu récupérer :
 
 Le "Facebook API Graph Access Token"
-Le "App secret".
-La "Page ID".
-Nous allons donc pouvoir commencer à configurer notre équipement dans nextDom.
+Le "App secret"
+La "Page ID"
 
-# Configuration des équipements
+# Configuration des équipements dans NextDom
 
 Nous allons maintenant créer un équipement dans NextDom pour gérer notre bot.
 Allez dans NextDom et choisissez "Fbbot" dans la liste des plugins.
 
-
-
 Cliquer sur (+) pour ajouter un nouvel équipement.
 
-![fbbot2](../images/fbbot2.png)
+Donner lui le nom de votre choix : BOT_NextDom dans mon cas
 
-Donner lui le nom de votre choix.
-
-![fbbot3](../images/fbbot3.png)
-
-Une fois que vous cliquez sur Valider, vous obtiendrez la page de configuration
-suivante :
-
-![fbbot4](../images/fbbot4.png)
+![FB9](../images/FB9.png)
 
 Vous retrouvez ici toute la configuration de votre équipement.
 Vous devez absolument renseigner l'ensemble des champs suivants pour pouvoir
@@ -122,7 +106,7 @@ faire fonctionner votre équipement :
 -   **Nom de l&#8217;équipement** : nom de votre équipement Fbbot
 -   **Activer** : permet de rendre votre équipement actif
 -   **Visible** : le rend visible sur le dashboard
--   **Page ID** : c'est l'ID de votre page Facebook que vous avez crée un peu
+-   **Page ID** : c'est l'ID de votre page Facebook que vous avez créé un peu
 plus haut. Cette donnée est obligatoire. Elle est utilisée comme identifiant
 logique dans NextDom et servira à distinguer vos différets bots si vous en
 créez plusieurs. Pour trouver cet identifiant suivez les étapes du paragraphe
@@ -144,10 +128,7 @@ copié dans l'étape précédente. Collez le ici.
 de créer automatiquement les nouveaux contacts. Voir détail dans le paragraphe
 de gestion des utilisateurs.
 
-
 En dessous vous retrouvez la configuration des commandes :
-
-![fbbot7](../images/fbbot7.png)
 
 -   **Nom** : nom de la commande
 -   **Facebook User ID** : ID de l'utilisateur Facebook sous forme numérique
@@ -193,7 +174,6 @@ En l'état, votre équipement NextDom est capable d'envoyer des messages à votr
 La prochaine étape consiste à ajouter des utilisateurs.
 Pour ce faire, retournez sur votre page Facebook et cliquez sur "Ajouter un bouton"
 
-FB7.png
 
 Positionnez ensuite le cuseur sur le nouveau bouton et cliquez sur Tester le bouton.
 
@@ -204,6 +184,8 @@ Envoyez ensuite un message à votre page Facebook depuis votre propre compte. Ce
 Retournez dans NextDom et accédez à l'onglet "Commandes" de votre équipement FBbot.
 
 Remplacer donc New user par votre prénom
+
+![FB8](../images/FB8.png)
 
 Vous pouvez sauvegarder l'équipement.
 
@@ -223,8 +205,6 @@ crée.
 Lorsque vous entamerez la discussion la réponse sera un implacable "Utilisateur non habilité".
 En effet pour pouvoir utiliser le bot, chaque utilisateur devra être autorisé.
 La gestion des autorisations se fait au niveau des commandes de l'équipement.
-
-![fbbot13](../images/fbbot13.png)			
 
 Les différentes options et commandes à utiliser sont les suivantes :
 * **Créer les nouveaux contacts** : Par défaut tous les utilisateurs qui contactent votre bot seront ajoutés dans la liste des commandes. Cela vous évite de devoir trouver les ID Facebook des utilisateurs que vous souhaitez ajouter. Pour désactiver cette option, décochez la case.
