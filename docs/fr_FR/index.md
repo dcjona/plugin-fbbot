@@ -1,4 +1,4 @@
-# Description
+# Description 2
 
 Ce plugin permet d'établir une connexion entre Facebook Messenger et NextDom pour
 envoyer des alertes à partir de NextDom ou discuter avec NextDom (en utilisant les
@@ -48,11 +48,12 @@ HTTPS://www.facebook.com/pages/create
 
 Choisissez "Figure locale ou publique"
 
-FB1.png
+![FB1](../images/FB1.png)
+
 
 Saisissez le nom de votre page public ainsi qu'une catégorie à laquelle l'associer puis continuez.
 
-FB2.png
+![FB2](../images/FB2.png)
 
 
 Création de l'application Messenger. Pour ce faire, rendez-vous sur l'adresse suivante :
@@ -61,24 +62,24 @@ https://developers.facebook.com/apps
 
 Cliquez sur le + pour ajotuer une app
 
-FB3.png
+![FB3](../images/FB3.png)
 
 Renseignez ensuite un nom d'usage et validez votre adresse mail de contact et cliquez sur "Créer un ID app".
 
 Une fois sur l'app cliquez sur le menu Tableau de bord et tout en bas sur Messenger
 
-FB4.png
+![FB4](../images/FB4.png)
 
 Associez ensuite votre page Facebook à votre application Messenger.
 
-FB5.png
+![FB5](../images/FB5.png)
 
 Modifiez les autorisations et générer un Facebook API Graph Access Token ( à noter n'oubliez pas)
 Suivez les instructions de sorte à sélectionner la page créée précédemment et acceptez la demande de droits.
 
 Récupérons maintenant l'ID de la page Facebook. Pour ce faire, retournez sur votre page et modifiez-la.
 
-FB6.png
+![FB6](../images/FB6.png)
 
 vous retrouverez l'ID de la page dans l'url...
 
