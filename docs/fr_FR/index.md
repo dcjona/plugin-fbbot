@@ -48,7 +48,7 @@ HTTPS://www.facebook.com/pages/create
 
 Choisissez "Figure locale ou publique"
 
-![FB1](../images/FB1.png)
+![FB1](../images/FB1.PNG)
 
 
 Saisissez le nom de votre page public ainsi qu'une catégorie à laquelle l'associer puis continuez.
@@ -101,7 +101,7 @@ Nous allons donc pouvoir commencer à configurer notre équipement dans nextDom.
 Nous allons maintenant créer un équipement dans NextDom pour gérer notre bot.
 Allez dans NextDom et choisissez "Fbbot" dans la liste des plugins.
 
-![fbbot1](../images/fbbot1.png)
+
 
 Cliquer sur (+) pour ajouter un nouvel équipement.
 
