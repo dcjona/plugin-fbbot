@@ -6,6 +6,7 @@ envoyer des alertes à partir de NextDom.
 Vous pourrez utiliser l'équipement une fois configuré directement dans un scénario ou sur le dashboard en manuel.
 Il est aussi possible d'utiliser les interactions.
 
+![FB11](../images/FB11.jpg)
 
 # Prérequis
 
